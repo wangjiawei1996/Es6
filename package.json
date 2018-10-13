@@ -9,9 +9,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-if": "^2.0.2",
+    "gulp-live-server": "0.0.31",
     "gulp-livereload": "^4.0.0",
     "gulp-plumber": "^1.2.0",
     "gulp-rename": "^1.4.0",
@@ -21,5 +23,15 @@
     "webpack": "^4.20.2",
     "webpack-stream": "^5.1.1",
     "yargs": "^12.0.2"
+  },
+  "dependencies": {
+    "@types/gulp": "^4.0.5",
+    "@types/gulp-concat": "0.0.32",
+    "@types/gulp-if": "0.0.33",
+    "@types/gulp-plumber": "0.0.32",
+    "@types/gulp-rename": "0.0.33",
+    "@types/gulp-uglify": "^3.0.5",
+    "@types/gulp-util": "^3.0.34",
+    "@types/webpack-stream": "^3.2.10"
   }
 }
