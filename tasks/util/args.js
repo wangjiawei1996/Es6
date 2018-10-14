@@ -1,6 +1,6 @@
 import yargs from 'yargs';
 
-const yargs = yargs
+const args = yargs
 
   .option('production',{
     boolean:true,

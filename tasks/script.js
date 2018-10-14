@@ -1,8 +1,8 @@
 import gulp from 'gulp';
-import guliif from 'gulp-if';
+import gulpif from 'gulp-if';
 import concat from 'gulp-concat';
 import webpack from 'webpack';
-import gulpwebpack from 'webpack-stream';
+import gulpWebpack from 'webpack-stream';
 import named from 'vinyl-named';
 import livereload from 'gulp-livereload';
 import plumber from 'gulp-plumber';
@@ -14,17 +14,13 @@ import args from './util/args';
 gulp.task('scripts',()=>{
   return gulp.src(['app/js/index.js'])
     .pipe(plumber({
-      errorHandler:function () {
+      errorHandle:function(){
 
       }
     }))
     .pipe(named())
     .pipe(gulpWebpack({
       module:{
-        loaders:[{
-          test:/\.js$/,
-          loader:'babel'
-        }]
       }
     }),null,(err,stats)=>{
       log(`Finished '${colors.cyan('scripts')}'`,stats.toString({
