@@ -8,4 +8,4 @@ gulp.task('browser',(cb)=>{
   gulp.watch('app/**/*.js',['scripts']);
   gulp.watch('app/**/*.ejs',['pages']);
   gulp.watch('app/**/*.css',['css']);
-})
+});

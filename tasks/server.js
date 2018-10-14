@@ -1,9 +1,9 @@
 import gulp from 'gulp';
-import guliif from 'gulp-if';
+import gulpif from 'gulp-if';
 import liveserver from 'gulp-live-server';
 import args from './util/args';
 
-gulp.task('server',(cb)=>{
+gulp.task('serve',(cb)=>{
   if(!args.watch) return cb();
 
   var server = liveserver.new(['--harmony','server/bin/www']);

@@ -5,23 +5,23 @@ const args = yargs
   .option('production',{
     boolean:true,
     default:false,
-    describe:'min all script'
+    describe:'min all scripts'
   })
 
   .option('watch',{
     boolean:true,
     default:false,
-    describe:'watch all script'
+    describe:'watch all files'
   })
 
   .option('verbose',{
     boolean:true,
     default:false,
-    describe:'log all script'
+    describe:'log'
   })
 
   .option('sourcemaps',{
-    describe:'force the creation of sourcemaps'
+    describe:'force the creation of sroucemaps'
   })
 
   .option('port',{
@@ -32,3 +32,4 @@ const args = yargs
 
   .argv
 
+export default args;
