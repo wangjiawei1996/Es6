@@ -28,3 +28,7 @@
     console.log('0',Math.sign(0));
     console.log('5',Math.sign(5));
 }
+
+{
+    console.log('-1',Math.cbrt(-1));
+}
