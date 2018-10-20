@@ -1,3 +1,5 @@
+import { error } from "util";
+
 {
     let obj={
         time:'2018-10-19',
@@ -52,4 +54,55 @@
     // delete monitor._r
     // console.log(monitor);
     console.log(Object.keys(monitor))
+}
+
+{
+    let obj={
+        time:'2018-10-19',
+        name:'net',
+        _r:123
+    };
+
+    console.log(Reflect.get(obj,'time'));
+    Reflect.set(obj,'name','Mr.wang')
+    console.log(obj)
+    console.log(Reflect.has(obj,'name'))
+}
+
+{
+    function validator(target,validator){
+        return new Proxy (target,{
+            _validator:validator,
+            set(target,key,value,Proxy){
+                if(target.hasOwnProperty(key)){
+                    let va = this._validator[key];
+                    if(!!va(value)){
+                        return Reflect.set(target,key,value,proxy)
+                    }else{
+                        throw error(`不能设置${key}到${value}`);
+                    }
+                }else{
+                    throw Error(`${key} 不存在`)
+                }
+            }
+        })
+    }
+
+    const personValiators={
+        name(val){
+            return typeof val==='string'
+        },
+        age(val){
+            return typeof val === 'number' && number>18
+        }
+    }
+    class Person{
+        constructor(name,age){
+            this.age=age;
+            this.name=name;
+            return validator(this,personValiators)
+        }
+    }
+    const person = new Person('lilei',30)
+    console.info(person)
 }
