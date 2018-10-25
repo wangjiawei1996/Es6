@@ -82,4 +82,99 @@ class Base{
         $cur.toggleClass('btn-boll-active');
         self.getCount();
     }
+    /**
+     * changePlayNav [改变玩法]
+     * @param {*} e 
+     */
+     changPlayNav(e){
+        let self = this;
+        let  $cur=$(e,currentTarget);
+        $cur.addClass('active').siblings().removeClass('active');
+        self.cur_play=$cur.attr('desc').toLocaleLowerCase();  //toLocaleLowerCase()这个方法是转化为小写
+        $('#zx_sm span').html(self.play_list.get(self.cur_play).tip) //切换不同的任号不同的玩法
+        $('.boll-list .btn-boll').removeClass('btn-boll-active'); //将上次的玩法清空
+        self.getCount(); 
+     }
+     /**
+      * assistHandle [操作区]
+      * @param {*} e 
+      */
+     assistHandle(e){
+        e.preventDefault();
+        let self = this;
+        let $cur=$(e.currentTarget);
+        let index=$cur.index();
+        $('.boll-list .btn-boll').removeClass('btn-boll-active'); //将上次的玩法清空
+        if(index===0){
+            $('.boll-list .btn-boll').addClass('btn-boll-active');
+        }
+        if(index===1){
+            $('.boll-list .btn-boll').each(function(i,t){
+                if(t.textContent-5>0){
+                    $(t).addClass('btn-boll-active')
+                }
+            })
+        }
+        if(index===2){
+            $('.boll-list .btn-boll').each(function(i,t){
+                if(t.textContent-6<0){
+                    $(t).addClass('btn-boll-active')
+                }
+            })
+        }
+        if(index===3){
+            $('.boll-list .btn-boll').each(function(i,t){
+                if(t.textContent%2==1){
+                    $(t).addClass('btn-boll-active')
+                }
+            })
+        }
+        if(index===4){
+            $('.boll-list .btn-boll').each(function(i,t){
+                if(t.textContent%2==0){
+                    $(t).addClass('btn-boll-active')
+                }
+            })
+        }
+        self.getCount();
+     }
+     /**
+      * getName [获取当前彩票的名称]
+      */
+     getName(){
+         return this.name
+     }
+     /**
+      * addCode [添加号码]
+      */
+     addCode(){
+         let self=this;
+         let $active=$('.boll-list .btn-boll-active').match(/\d{2}/g); //把取出的所有值拿出来
+         let active=$active?$active.length:0;
+         let count = self.computeCount(active,self.cur_play)  //active当前选中的号码 self.cur_play玩法
+         if(count){
+             self.addCodeItem($active.join(''),self.cur_play,self.play_list.get(self.cur_play).name,count);
+         }
+     }
+     /**
+      * addcodeItem [添加单次号码]
+      * @param {*} code 
+      * @param {*} type 
+      * @param {*} typeName 
+      * @param {*} count 
+      */
+     addCodeItem(code,type,typeName,count){
+         let self = this;
+         const tpl=`
+         <li codes="${type}|${code}" bonus="${count*2}" count="${count}">
+		 <div class="code">
+			 <b>${typeName}${count>1?'复式':'单式'}</b>
+			 <b class="em">${code}</b>
+			 [${count}注,<em class="code-list-money">${count*2}</em>元]
+		 </div>
+	 </li>
+        `;
+        $(self.cart_el).append(tpl);
+        self.getTotal();
+     }
 }
