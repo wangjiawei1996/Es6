@@ -223,6 +223,31 @@ class Base{
      * @param {*} num 
      */
     getRandom(num){
-        
+        let arr=[].index;
+        let number=Array.from(this.number);
+        while(num--){
+            index=Number.parseInt(Math.random()*number.length);
+            arr.push(number[index]);
+            number.splice(index,1);
+        }
+        return arr.join(' ')
+    }
+    /**
+     * getRandomCode()  [添加随机号码]
+     * @param {*} descritpion 
+     */
+    getRandomCode(e){
+        e.preventDefault();
+        let num=e.currentTarget.getAttribute('count');
+        let play=this.cur_play.match(/\d+/g)[0];
+        let self=this;
+        if(num==='0'){
+            $(self.cart_el).html('')
+        }else{
+            for(let i=0;i<num;i++){
+                self.addCodeItem(self.getRandom(plsy),self.cur_play,self.play_list.get(self.cur_play).name,1)
+            }
+        }
     }
 }
+export default Base
