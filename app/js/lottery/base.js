@@ -153,7 +153,7 @@ class Base{
          let active=$active?$active.length:0;
          let count = self.computeCount(active,self.cur_play)  //active当前选中的号码 self.cur_play玩法
          if(count){
-             self.addCodeItem($active.join(''),self.cur_play,self.play_list.get(self.cur_play).name,count);
+             self.addCodeItem($active.join(' '),self.cur_play,self.play_list.get(self.cur_play).name,count);
          }
      }
      /**
@@ -213,7 +213,7 @@ class Base{
     getTotal(){
         let count=0;
         $('.codelist li').each(function(index,item){
-            count+=$(item).attr(count)*1;
+            count+=$(item).attr('count')*1;
         })
         $('#count').text(count);
         $('#money').text(count*2);
